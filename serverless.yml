@@ -1,0 +1,25 @@
+org: tiangeli
+app: cicd-tdd-app
+service: cicd-tdd
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: 'dev'
+  region: 'ap-southeast-1'
+  apiName: serverless-cicd
+  deploymentBucket: serverless-demo-sal
+  deploymentPrefix: serverless2019
+
+functions:
+  serverless-cicd:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
+          cors: true
+plugins:
+  - serverless-mocha-plugin
